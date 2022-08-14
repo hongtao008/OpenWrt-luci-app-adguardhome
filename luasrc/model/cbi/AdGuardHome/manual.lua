@@ -5,13 +5,27 @@ local sys=require"luci.sys"
 require("string")
 require("io")
 require("table")
+function file_exist(path)
+	local file = io.open(path, "rb")
+	if file then file:close() end
+	return file ~= nil
+end
 function gen_template_config()
 	local b
 	local d=""
-	for cnt in io.lines("/tmp/resolv.conf.auto") do
-		b=string.match (cnt,"^[^#]*nameserver%s+([^%s]+)$")
-		if (b~=nil) then
-			d=d.."  - "..b.."\n"
+	if file_exist("/tmp/resolv.conf.d/resolv.conf.auto") then
+		for cnt in io.lines("/tmp/resolv.conf.d/resolv.conf.auto") do
+			b=string.match (cnt,"^[^#]*nameserver%s+([^%s]+)$")
+			if (b~=nil) then
+				d=d.."  - "..b.."\n"
+			end
+		end
+	elseif file_exist("/tmp/resolv.conf.auto") then
+		for cnt in io.lines("/tmp/resolv.conf.auto") do
+			b=string.match (cnt,"^[^#]*nameserver%s+([^%s]+)$")
+			if (b~=nil) then
+				d=d.."  - "..b.."\n"
+			end
 		end
 	end
 	local f=io.open("/usr/share/AdGuardHome/AdGuardHome_template.yaml", "r+")
