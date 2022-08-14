@@ -14,14 +14,28 @@ entry({"admin", "services", "AdGuardHome", "getlog"}, call("get_log"))
 entry({"admin", "services", "AdGuardHome", "dodellog"}, call("do_dellog"))
 entry({"admin", "services", "AdGuardHome", "reloadconfig"}, call("reload_config"))
 entry({"admin", "services", "AdGuardHome", "gettemplateconfig"}, call("get_template_config"))
-end 
+end
+function file_exist(path)
+	local file = io.open(path, "rb")
+	if file then file:close() end
+	return file ~= nil
+end
 function get_template_config()
 	local b
 	local d=""
-	for cnt in io.lines("/tmp/resolv.conf.auto") do
-		b=string.match (cnt,"^[^#]*nameserver%s+([^%s]+)$")
-		if (b~=nil) then
-			d=d.."  - "..b.."\n"
+	if file_exist("/tmp/resolv.conf.d/resolv.conf.auto") then
+		for cnt in io.lines("/tmp/resolv.conf.d/resolv.conf.auto") do
+			b=string.match (cnt,"^[^#]*nameserver%s+([^%s]+)$")
+			if (b~=nil) then
+				d=d.."  - "..b.."\n"
+			end
+		end
+	elseif file_exist("/tmp/resolv.conf.auto") then
+		for cnt in io.lines("/tmp/resolv.conf.auto") do
+			b=string.match (cnt,"^[^#]*nameserver%s+([^%s]+)$")
+			if (b~=nil) then
+				d=d.."  - "..b.."\n"
+			end
 		end
 	end
 	local f=io.open("/usr/share/AdGuardHome/AdGuardHome_template.yaml", "r+")
