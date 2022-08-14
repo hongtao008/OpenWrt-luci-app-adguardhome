@@ -239,7 +239,7 @@ msgstr "下载日志"
 
 #/cgi-bin/luci//admin/services/AdGuardHome/manual/
 msgid "Use template"
-msgstr "使用模板"
+msgstr "使用模板(root/admin)"
 #hide button
 msgid "Reload Config"
 msgstr "重新载入配置"
