@@ -73,7 +73,7 @@ filters:
   url: https://raw.githubusercontent.com/vokins/yhosts/master/data/tvbox.txt
   name: tvbox
   id: 1575018007
-- enabled: true
+- enabled: false
   url: https://hosts.nfz.moe/full/hosts
   name: neoHosts full
   id: 1575618240
@@ -93,6 +93,22 @@ filters:
   url: https://cdn.jsdelivr.net/gh/privacy-protection-tools/anti-AD/anti-ad-easylist.txt
   name: anti-AD(Adblock+neohosts+yhosts+cjxlist+adhlist)
   id: 1577113202
+- enabled: true
+  url: https://gitee.com/halflife/list/raw/master/ad.txt
+  name: Halflife 规则
+  id: 1577113202
+- enabled: false
+  url: https://anti-ad.net/easylist.txt
+  name: anti-AD(Adblock+neohosts+yhosts+cjxlist+adhlist)
+  id: 1644677671
+- enabled: false
+  url: https://gitee.com/xinggsf/Adblock-Rule/raw/master/mv.txt
+  name: Xinggsf 乘风视频过滤
+  id: 1644677672
+- enabled: true
+  url: https://gist.githubusercontent.com/Ewpratten/a25ae63a7200c02c850fede2f32453cf/raw/b9318009399b99e822515d388b8458557d828c37/hosts-yt-ads
+  name: youtube-ads
+  id: 1649950105  
 user_rules: []
 dhcp:
   enabled: false
